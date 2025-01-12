@@ -1,5 +1,4 @@
-### TS-NODEMON-TEMPLATE
+### Cutting Algorithm
 
-This is a working nodemon modules typescript template
-
-### I have no idea how the build thing works and it might not
+My try to create a working cutting algorithm that produces the most optimal usage of an area
+After this works I will transform it into an npm package
