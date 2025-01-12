@@ -23,8 +23,10 @@ function createPiece(
 
 // Array of initial data
 const rawPieces = [
-  { width: 300, height: 500, grainDirection: true },
+  { width: 300, height: 500, grainDirection: false },
   { width: 800, height: 900, grainDirection: false },
+  { width: 1800, height: 900, grainDirection: false },
+  { width: 2800, height: 900, grainDirection: false },
 ];
 
 // Convert raw data to valid `Piece` objects
