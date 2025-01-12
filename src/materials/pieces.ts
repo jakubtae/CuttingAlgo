@@ -3,6 +3,7 @@ export interface Piece {
   height: number;
   grainDirection: boolean;
   readonly area: number;
+  id?: number;
 }
 
 // Utility function to create a Piece object
@@ -25,7 +26,7 @@ function createPiece(
 const rawPieces = [
   { width: 300, height: 500, grainDirection: false },
   { width: 800, height: 900, grainDirection: false },
-  { width: 1800, height: 900, grainDirection: false },
+  { width: 1000, height: 900, grainDirection: false },
   { width: 2800, height: 900, grainDirection: false },
 ];
 
