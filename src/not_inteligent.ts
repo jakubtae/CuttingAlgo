@@ -20,8 +20,13 @@ interface PlacedPieces {
   AreaId: number;
 }
 
-const PlacedPieces: PlacedPieces[] = [];
+interface PossibleAnswersInterface {
+  id: string;
+  PlacedPieces: PlacedPieces[];
+}
 
+const PlacedPieces: PlacedPieces[] = [];
+const PossibleAnswers: PossibleAnswersInterface[] = [];
 const placingAlgorithm = (
   Pieces: Piece[],
   pieceIndex: number,
@@ -62,9 +67,31 @@ const placingAlgorithm = (
   }
 
   console.log(`Placed piece ID: ${piece.id}`);
-  console.log(`Next piece to place:`, Pieces[pieceIndex + 1]);
-
-  // Recursively place the next piece
+  const nextPiece = Pieces[pieceIndex + 1];
+  if (!nextPiece) {
+    console.log(chalk.blue("No more pieces to place"));
+    return true;
+  }
+  console.log(`Next piece to place:`, nextPiece);
+  let SideArea = {
+    x: areaToPlaceIn.x + piece.width,
+    y: areaToPlaceIn.y,
+    width: areaToPlaceIn.width - piece.width - sawWidth,
+    height: areaToPlaceIn.height,
+    AreaId: areaToPlaceIn.AreaId + 1,
+  };
+  let BottomArea = {
+    x: areaToPlaceIn.x,
+    y: areaToPlaceIn.y + piece.height,
+    width: piece.width,
+    height: areaToPlaceIn.height - piece.height - sawWidth,
+    AreaId: areaToPlaceIn.AreaId + 1,
+  };
+  console.log(chalk.blue("Side Area: "), SideArea);
+  console.log(chalk.blue("Bottom Area: "), BottomArea);
+  //! Find the best area to place the piece in by summing up all the areas, judging them by already wasted space
+  // Recursively place the next piece in both the bottom and side areas and create a copycat array of the placed pieces
+  const placedPiecesCopy = [...PlacedPieces];
   placingAlgorithm(Pieces, pieceIndex + 1, {
     x: piece.width,
     y: 0,
